@@ -1,4 +1,12 @@
-import { Chatroom, Message, User } from '../../models/index';
+import { Chatroom, Message, User } from "../../models/index";
+
+const CurrentUser = (obj, args, context) => {
+	return User.findOne({
+		where: {
+			displayName: "Jaime Agudo"
+		}
+	}).then(user => user.dataValues);
+};
 
 const chatrooms = (obj, args, context) => {
 	return Chatroom.findAll();
@@ -13,13 +21,13 @@ const chatroom = (obj, args, context) => {
 };
 
 const users = (obj, args, context) => {
-	return 'chatroomId' in args ?
-		User.findAll({
-			where: {
-				chatroomId: args.chatroomId
-			}
-		}) :
-		User.findAll();
+	return "chatroomId" in args
+		? User.findAll({
+				where: {
+					chatroomId: args.chatroomId
+				}
+		  })
+		: User.findAll();
 };
 
 const user = (obj, args, context) => {
@@ -31,13 +39,13 @@ const user = (obj, args, context) => {
 };
 
 const messages = (obj, args, context) => {
-	return 'chatroomId' in args ?
-		Message.findAll({
-			where: {
-				chatroomId: args.chatroomId
-			}
-		}) :
-		Message.findAll();
+	return "chatroomId" in args
+		? Message.findAll({
+				where: {
+					chatroomId: args.chatroomId
+				}
+		  })
+		: Message.findAll();
 };
 
-export { chatrooms, chatroom, users, user, messages };
+export { chatrooms, chatroom, users, user, messages, CurrentUser };

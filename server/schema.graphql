@@ -5,11 +5,6 @@ type Chatroom {
 	messages: [Message]
 }
 
-type User {
-	id: ID
-	displayName: String
-}
-
 type Message {
 	id: ID
 	text: String
@@ -17,16 +12,56 @@ type Message {
 	createdAt: String
 }
 
+type Post {
+	id: ID
+	title: String
+	votes: Int
+	author: [User]
+}
+
+type User {
+	id: ID
+	uid: ID
+	login: String
+	email: String
+	firstName: String
+	middleName: String
+	lastName: String
+	preferredLanguage: String
+	fcmTokens: [String]
+	#    workedHoursPerWeek:    [WorkedHoursPerWeek]
+	#    workedHoursPerDay:     [WorkedHoursPerDay]
+	polls: [Poll]
+}
+
+type Poll {
+	title: String
+	shortContent: String
+	fullContent: String
+	expiresAt: String
+	createdAt: String
+	allowedResponses: [String]
+	response: String
+	readAt: String
+	archivedAt: String
+	category: [String]
+}
+
 type Query {
+	CurrentUser: User
 	chatrooms: [Chatroom]
-	chatroom(id:Int!): Chatroom
-	messages(chatroomId:Int): [Message]
-	users(chatroomId:Int): [User]
-	user(id:Int, search:String): User
+	chatroom(id: Int!): Chatroom
+	messages(chatroomId: Int): [Message]
+	users(chatroomId: Int): [User]
+	user(id: Int, search: String): User
+	allPosts: [Post]
+	fcmTokens: [String]
 }
 
 type Mutation {
 	addMessage(text: String!, userId: Int!, chatroomId: Int!): Message
+	#	upvotePost(postId: ID): Post
+	AddFcmTokenToCurrentUser(fcmToken: String!): String
 }
 
 type Subscription {
@@ -38,3 +73,4 @@ schema {
 	mutation: Mutation
 	subscription: Subscription
 }
+####################################

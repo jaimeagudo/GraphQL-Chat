@@ -1,4 +1,4 @@
-import { Message, User } from '../models';
+import { Message, User } from "../models";
 
 const ChatroomResolve = {
 	users(obj) {
@@ -13,12 +13,10 @@ const ChatroomResolve = {
 			where: {
 				chatroomId: obj.id
 			},
-			order: [
-				['createdAt', 'DESC']
-			]
+			order: [["createdAt", "DESC"]]
 		});
 	}
-}
+};
 
 const MessageResolve = {
 	createdBy(obj) {
@@ -28,6 +26,6 @@ const MessageResolve = {
 			}
 		});
 	}
-}
+};
 
 export { ChatroomResolve, MessageResolve };
