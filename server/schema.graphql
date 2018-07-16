@@ -51,6 +51,7 @@ type Query {
 	CurrentUser: User
 	chatrooms: [Chatroom]
 	chatroom(id: Int!): Chatroom
+	chatroomByTitle(title: String!): Chatroom
 	messages(chatroomId: Int): [Message]
 	users(chatroomId: Int): [User]
 	user(id: Int, search: String): User
@@ -66,6 +67,7 @@ type Mutation {
 
 type Subscription {
 	messageAdded(chatroomId: Int!): Message
+	messageAddedByTitle(chatroomTitle: String!): Message
 }
 
 schema {

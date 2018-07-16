@@ -2,6 +2,7 @@ import { ChatroomResolve, MessageResolve } from "./associations";
 import {
 	chatrooms,
 	chatroom,
+	chatroomByTitle,
 	users,
 	user,
 	messages,
@@ -16,6 +17,7 @@ const resolvers = {
 		CurrentUser,
 		chatrooms,
 		chatroom,
+		chatroomByTitle,
 		users,
 		user,
 		messages

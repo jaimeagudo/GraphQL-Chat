@@ -20,6 +20,14 @@ const chatroom = (obj, args, context) => {
 	}).then(chatroom => chatroom.dataValues);
 };
 
+const chatroomByTitle = (obj, args, context) => {
+	return Chatroom.findOne({
+		where: {
+			title: args.title
+		}
+	}).then(chatroom => chatroom.dataValues);
+};
+
 const users = (obj, args, context) => {
 	return "chatroomId" in args
 		? User.findAll({
@@ -48,4 +56,12 @@ const messages = (obj, args, context) => {
 		: Message.findAll();
 };
 
-export { chatrooms, chatroom, users, user, messages, CurrentUser };
+export {
+	chatrooms,
+	chatroom,
+	chatroomByTitle,
+	users,
+	user,
+	messages,
+	CurrentUser
+};
