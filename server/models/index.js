@@ -9,7 +9,9 @@ const Chatroom = db.define("chatroom", {
 
 const Message = db.define("message", {
 	text: { type: Sequelize.STRING },
-	createdAt: { type: Sequelize.DATE, defaultValue: Date.now() }
+	createdAt: { type: Sequelize.DATE, defaultValue: Date.now() },
+	sentAt: { type: Sequelize.DATE, defaultValue: Date.now() },
+	receivedAt: { type: Sequelize.DATE }
 });
 
 const User = db.define("user", {
@@ -47,29 +49,31 @@ User.hasMany(Message);
 User.hasMany(FcmToken);
 
 if (process.env.NODE_ENV === "production") {
-	casual.seed(123);
+	casual.seed(1982);
 	db.sync({ force: true }).then(() => {
 		const jaime = User.create({ displayName: "Jaime Agudo" });
-		times(6, () => {
-			Chatroom.create({
-				title: casual.words(1)
-			}).then(chatroom => {
-				times(5, () => {
-					chatroom.createUser();
-					return chatroom
-						.createUser({
-							displayName: casual.first_name
-						})
-						.then(user => {
-							return chatroom.createMessage({
-								text: casual.sentences(1),
-								userId: user.dataValues.id,
-								createdAt: casual.unix_time
-							});
+		//		times(6, () => {
+		Chatroom.create({
+			title: "support" //casual.words(1)
+		}).then(chatroom => {
+			times(5, () => {
+				chatroom.createUser();
+				return chatroom
+					.createUser({
+						displayName: casual.first_name
+					})
+					.then(user => {
+						return chatroom.createMessage({
+							text: casual.sentences(1),
+							userId: user.dataValues.id,
+							createdAt: casual.unix_time,
+							sentAt: casual.unix_time,
+							receivedAt: casual.unix_time
 						});
-				});
+					});
 			});
 		});
+		//		});
 	});
 }
 

@@ -10,7 +10,7 @@ import {
 } from "./query";
 
 import { addMessage } from "./mutation";
-import { messageAdded } from "./subscription";
+import { messageAdded, messageAddedByTitle } from "./subscription";
 
 const resolvers = {
 	Query: {
@@ -28,7 +28,8 @@ const resolvers = {
 		addMessage
 	},
 	Subscription: {
-		messageAdded
+		messageAdded,
+		messageAddedByTitle
 	}
 };
 export default resolvers;

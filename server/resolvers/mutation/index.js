@@ -5,7 +5,9 @@ const addMessage = (obj, args, context) => {
 	return Message.create({
 		text: args.text,
 		userId: args.userId,
-		chatroomId: args.chatroomId
+		chatroomId: args.chatroomId,
+		sentAt: Date.now(),
+		receivedAt: Date.now() //TODO remove, doesn't make sense
 	})
 		.then(message => {
 			return message.dataValues;

@@ -13,7 +13,7 @@ const ChatroomResolve = {
 			where: {
 				chatroomId: obj.id
 			},
-			order: [["createdAt", "DESC"]]
+			order: [["createdAt", "ASC"]]
 		});
 	}
 };
